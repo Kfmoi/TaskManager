@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // DB config
-mongoose.connect("mongodb+srv://kfmoi26:Kfmoi_1412003@taskmanager.j8rjpzt.mongodb.net/app?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI);
 
 
 // API endpoints
