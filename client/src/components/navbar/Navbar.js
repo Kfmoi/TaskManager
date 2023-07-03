@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import './navbar.css'
 
 const Navbar = () => {
 
