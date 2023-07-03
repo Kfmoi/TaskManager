@@ -1,10 +1,18 @@
 
 import './App.css';
+import {Router, Route, Routes} from 'react-router-dom';
+import { Login } from './pages';
+import { Navbar } from './components';
 
 function App() {
   return (
     <div className="App">
-      <h1>React App</h1>
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
