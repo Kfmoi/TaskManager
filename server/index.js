@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import { usersRouter } from './routes/user.js';
+import { taskRouter } from './routes/task.js';
 
 
 dotenv.config();
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGODB_URI);
 
 // API endpoints
 app.use('/user', usersRouter);
+app.use('/task', taskRouter);
 
 // Listener
 app.listen(process.env.PORT || 5000, () => console.log(`Server running on port ${process.env.PORT}`));
