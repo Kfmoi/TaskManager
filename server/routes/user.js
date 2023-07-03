@@ -65,6 +65,7 @@ router.post("/login", async (req, res) => {
   res.json({
     status: `User ${username} logged in!`,
     token,
+    u: user._id,
   });
 });
 
