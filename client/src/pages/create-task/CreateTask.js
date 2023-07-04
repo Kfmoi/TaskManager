@@ -3,6 +3,7 @@ import useUserID from '../../hooks/useUserID';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './createTask.css';
 
 const CreateTask = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -10,7 +11,8 @@ const CreateTask = () => {
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
   const navigate = useNavigate();
-  const userID = useUserID();
+
+  const statusOptions = ['Pending', 'In Progress', 'Completed'];
 
   const createTask = async () => {
     try {
@@ -35,38 +37,46 @@ const CreateTask = () => {
   };
 
   return (
-    <div>
-      <h1>Create Task</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="status">Status:</label>
-          <input
-            type="text"
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          />
-        </div>
-        <button type="submit">Create Task</button>
-      </form>
+    <div className='create-task-page'>
+      <div className='create-task-card'>
+        <h1 className='create-task-title'>Create Task</h1>
+        <form onSubmit={handleSubmit}>
+          <div className='create-task-input'>
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              
+            />
+          </div>
+          <div  className='create-task-input'>
+            <label htmlFor="description">Description:</label>
+            <textarea 
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div className='create-task-input'>
+            <label htmlFor="status">Status:</label>
+            <select
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="">Select status</option>
+              {statusOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button type="submit" className='create-task-submit'>Create Task</button>
+        </form>
+      </div>
     </div>
   );
 };
