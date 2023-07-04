@@ -18,8 +18,9 @@ const Register = () => {
         password,
       });
       setAlertClass("success");
-      alert("User created");
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.error(error);
       setAlertClass("error");
@@ -28,6 +29,11 @@ const Register = () => {
 
   return (
     <div className="auth-container">
+      {alertClass && (
+        <div className={`alert ${alertClass}`}>
+          {alertClass === "success" ? `${username} created successfully !!!` : "Registration failed"}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="login-form">
         <h2>Register</h2>
         <div className="form-group">
@@ -56,11 +62,6 @@ const Register = () => {
           Login Now
         </Link>
       </form>
-      {alertClass && (
-        <div className={`alert ${alertClass}`}>
-          {alertClass === "success" ? "User created" : "Registration failed"}
-        </div>
-      )}
     </div>
   );
 };
