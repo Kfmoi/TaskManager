@@ -11,7 +11,7 @@ const CreateTask = () => {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
-  const statusOptions = ["Pending", "In Progress", "Completed"];
+  const statusOptions = ["Pending", "Delayed", "Completed"];
 
   const createTask = async () => {
     try {

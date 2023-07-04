@@ -10,7 +10,7 @@ const EditTask = () => {
   const [status, setStatus] = useState("");
   const [cookies] = useCookies(["mytoken"]);
 
-  const statusOptions = ["Pending", "In Progress", "Completed"];
+  const statusOptions = ["Pending", "Delayed", "Completed"];
 
   const navigate = useNavigate();
 
