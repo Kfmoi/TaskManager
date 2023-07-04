@@ -13,21 +13,19 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await axios.post("http://localhost:3000/user/login/", {
         username,
         password,
       });
-  
+
       setToken("mytoken", response.data.token);
       window.localStorage.setItem("userID", response.data.u);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="auth-container">
