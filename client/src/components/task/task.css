@@ -89,3 +89,19 @@
   margin-bottom: 20px;
   margin-left: 20px;
 }
+
+.task-status{
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.task-status img{
+    width: 68px;
+    height: 68px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
