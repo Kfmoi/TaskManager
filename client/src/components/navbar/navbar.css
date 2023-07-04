@@ -40,3 +40,19 @@
 .navbar a:active {
   color: #00ff00;
 }
+
+.logout-btn {
+  background-color: #2e8ece;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
+}
