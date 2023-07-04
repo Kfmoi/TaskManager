@@ -3,8 +3,6 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 
-
-
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

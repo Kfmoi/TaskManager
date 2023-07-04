@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const [token, setToken] = useCookies(["mytoken"]);
 
@@ -22,6 +23,7 @@ const Login = () => {
 
       setToken("mytoken", response.data.token);
       window.localStorage.setItem("userID", response.data.u);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
