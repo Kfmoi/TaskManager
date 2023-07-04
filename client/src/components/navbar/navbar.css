@@ -1,34 +1,42 @@
 .navbar {
-    background-color: rgba(
-      255,
-      255,
-      255,
-      0.8
-    ); /* Adjust the alpha value as needed */
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-    display: flex;
-  }
-  
-  .navbar a {
-    color: #000;
-    text-decoration: none;
-  }
-  
-  .right {
-    float: right;
-    margin-right: 20px;
-  }
-  
-  .navbar a:hover {
-    color: #00ff00;
-  }
-  
-  .navbar a:active {
-    color: #00ff00;
-  }
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Adjust the alpha value as needed */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: #2e8ece;
+  text-decoration: none;
+}
+
+.left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 49%;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar a:hover {
+  color: #ff0000;
+}
+
+.navbar a:active {
+  color: #00ff00;
+}

@@ -13,18 +13,22 @@ const Navbar = () => {
     const logout = () => {
         setCookies("mytoken", "");
     window.localStorage.removeItem("userID");
+    window.localStorage.removeItem("taskIds");
     navigate("/login");
     };
 
   return (
     <div className="navbar">
-      <div className="right">
+      <div className="left">
         {!cookies.mytoken ? (
           <Link to="/login">Login/Register</Link>
         ) : (
           <button onClick={logout} className="logout-btn">Log Out</button>
         )}
       </div>
+      <Link to="/">
+        Home
+      </Link>
     </div>
   );
 };
