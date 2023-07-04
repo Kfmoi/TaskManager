@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./home.css";
 import { Task } from "../../components";
 import useUserID from "../../hooks/useUserID";
@@ -34,8 +34,12 @@ const Home = () => {
         <h1>Task Manager</h1>
       </div>
       <div className="home-body">
+
         {cookies.mytoken ? (
           <div>
+            <Link to="/create-task" className="create-task">
+              Create Task
+            </Link>
             {tasks.map((task) => (
               <Task
                 key={task.id} 
