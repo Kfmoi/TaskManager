@@ -10,16 +10,16 @@ const Home = () => {
   const [cookies] = useCookies(["mytoken"]);
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
+  const userID = useUserID();
 
   const getTasks = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`
-      );
-      console.log(response.data);
+      const response = await axios.get(`http://localhost:3000/task/${userID}}`);
       setTasks(response.data);
-  
-      window.localStorage.setItem("taskIds", JSON.stringify(response.data.map((task) => task._id)));
+      window.localStorage.setItem(
+        "taskIds",
+        JSON.stringify(response.data.map((task) => task._id))
+      );
     } catch (error) {
       console.error("Error fetching user tasks:", error);
     }
@@ -28,16 +28,13 @@ const Home = () => {
   const deleteTask = async (taskId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/task/${window.localStorage.getItem("userID")}/${taskId}`
+        `http://localhost:3000/task/${userID}/${taskId}`
       );
-      console.log(response.data);
       getTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
-  
-  
 
   useEffect(() => {
     getTasks();
@@ -49,7 +46,6 @@ const Home = () => {
         <h1>Task Manager</h1>
       </div>
       <div className="home-body">
-
         {cookies.mytoken ? (
           <div>
             <Link to="/create-task" className="create-task">
