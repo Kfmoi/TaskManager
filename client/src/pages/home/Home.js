@@ -27,7 +27,7 @@ const Home = () => {
 
   const deleteTask = async (taskId) => {
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `http://localhost:3000/task/${window.localStorage.getItem(
           "userID"
         )}/${taskId}`
@@ -66,9 +66,11 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <div>
-            <h1>You are not logged in</h1>
-            <button onClick={() => navigate("/login")}>Login</button>
+          <div className="not-logged-in">
+            <h1 className="create-task-title">You are not logged in</h1>
+            <Link to="/login">
+              <button className="create-task-submit">Login</button>
+            </Link>
           </div>
         )}
       </div>

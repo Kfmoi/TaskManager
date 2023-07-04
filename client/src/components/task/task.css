@@ -1,89 +1,91 @@
-.task-comp{
-    margin: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value as needed */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+.task-comp {
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Adjust the alpha value as needed */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  width: 800px;
 }
 
-.task-comp:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.task-comp:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .task-top {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-
-
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-
-
-.task-top-buttons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.task-top-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.task-top-buttons button{
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 10px;
-    border: none;
-    padding: 20px;
-    color: aliceblue;
-    font-size: 1rem;
-    font-weight: 700;
+.task-top-buttons button {
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 20px;
+  color: aliceblue;
+  font-size: 1rem;
+  font-weight: 700;
 
-    background: linear-gradient(90deg, rgba(33, 150, 243, 1) 0%, rgba(0, 188, 212, 1) 100%, rgba(238, 130, 238, 1) 100%);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    rgba(33, 150, 243, 1) 0%,
+    rgba(0, 188, 212, 1) 100%,
+    rgba(238, 130, 238, 1) 100%
+  );
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.task-top-buttons button:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.task-top-buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.task-bottom{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.task-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.task-title{
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: 20px;
+.task-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
-.task-desc{
-    font-size: 1rem;
-    font-weight: 700;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: 20px;
+.task-desc {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
-.task-status{
-    font-size: 1rem;
-    font-weight: 700;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: 20px;
+.task-status {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
-
-
-
-
-
