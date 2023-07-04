@@ -6,56 +6,89 @@ const router = express.Router();
 
 // Post Task
 router.post("/:userId", async (req, res) => {
-    const { userId } = req.params;
-    const { title, description, status } = req.body;
+  const { userId } = req.params;
+  const { title, description, status } = req.body;
 
-    try {
-        const user = await UserModel.findById(userId);
+  try {
+    const user = await UserModel.findById(userId);
 
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        const task = new TaskModel({
-            title,
-            description,
-            status,
-            user: user._id // Assigning the user reference to the task
-        });
-
-        user.tasks.push(task._id);
-
-        await user.save();
-
-        await task.save();
-
-        res.json({
-            status: `Task ${title} saved!`,
-        });
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
+
+    const task = new TaskModel({
+      title,
+      description,
+      status,
+      user: user._id,
+    });
+
+    user.tasks.push(task._id);
+
+    await user.save();
+
+    await task.save();
+
+    res.json({
+      status: `Task ${title} saved!`,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // Get User Tasks
 router.get("/:userId", async (req, res) => {
-    const { userId } = req.params;
+  const { userId } = req.params;
 
-    try {
+  try {
+    const user = UserModel.findById(userId);
 
-        const user = UserModel.findById(userId);
-
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        const tasks = await TaskModel.find({ user: userId });
-
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
+
+    const tasks = await TaskModel.find({ user: userId });
+
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
+// Delete Task
+router.delete("/:userId/:taskId", async (req, res) => {
+  const { userId, taskId } = req.params;
 
-export { router as taskRouter};
+  try {
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const task = await TaskModel.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    if (task.user.toString() !== userId) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    user.tasks = user.tasks.filter(
+      (taskId) => taskId.toString() !== task._id.toString()
+    );
+
+    await user.save();
+
+    await TaskModel.findByIdAndDelete(taskId);
+
+    res.json({ message: "Task deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+export { router as taskRouter };
