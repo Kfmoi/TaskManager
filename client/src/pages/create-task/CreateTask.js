@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import useUserID from '../../hooks/useUserID';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './createTask.css';
+import React, { useState } from "react";
+import useUserID from "../../hooks/useUserID";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./createTask.css";
 
 const CreateTask = () => {
-  const [cookies] = useCookies(['mytoken']);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
+  const [cookies] = useCookies(["mytoken"]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
-  const statusOptions = ['Pending', 'In Progress', 'Completed'];
+  const statusOptions = ["Pending", "In Progress", "Completed"];
 
   const createTask = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/task/${window.localStorage.getItem('userID')}`,
+        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`,
         {
           title,
           description,
@@ -26,40 +26,39 @@ const CreateTask = () => {
       );
       console.log(response.data);
     } catch (error) {
-      console.error('Error creating task:', error);
+      console.error("Error creating task:", error);
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     createTask();
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <div className='create-task-page'>
-      <div className='create-task-card'>
-        <h1 className='create-task-title'>Create Task</h1>
+    <div className="create-task-page">
+      <div className="create-task-card">
+        <h1 className="create-task-title">Create Task</h1>
         <form onSubmit={handleSubmit}>
-          <div className='create-task-input'>
+          <div className="create-task-input">
             <label htmlFor="title">Title:</label>
             <input
               type="text"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              
             />
           </div>
-          <div  className='create-task-input'>
+          <div className="create-task-input">
             <label htmlFor="description">Description:</label>
-            <textarea 
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <div className='create-task-input'>
+          <div className="create-task-input">
             <label htmlFor="status">Status:</label>
             <select
               id="status"
@@ -74,7 +73,9 @@ const CreateTask = () => {
               ))}
             </select>
           </div>
-          <button type="submit" className='create-task-submit'>Create Task</button>
+          <button type="submit" className="create-task-submit">
+            Create Task
+          </button>
         </form>
       </div>
     </div>
