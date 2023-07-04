@@ -16,6 +16,9 @@
     justify-content: space-between;
     align-content: center;
     align-items: center;
+    margin-bottom: 20px;
+
+
 }
 
 
@@ -28,12 +31,56 @@
 
 .task-top-buttons button{
     margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    color: aliceblue;
+    font-size: 1rem;
+    font-weight: 700;
+
+    background: linear-gradient(90deg, rgba(33, 150, 243, 1) 0%, rgba(0, 188, 212, 1) 100%, rgba(238, 130, 238, 1) 100%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.task-top-buttons button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .task-bottom{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.task-title{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.task-desc{
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.task-status{
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 

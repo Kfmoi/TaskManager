@@ -7,7 +7,7 @@ const Task = ({title, desc, status, edit, del}) => {
   return (
     <div className='task-comp'>
         <div className='task-top'>
-            <h1>{title}</h1>
+            <h1 className='task-title'>{title}</h1>
             <div className='task-top-buttons'>
                 <button onClick={edit}>Edit</button>
                 <button onClick={del}>Delete</button>
@@ -15,8 +15,8 @@ const Task = ({title, desc, status, edit, del}) => {
 
         </div>
         <div className='task-bottom'>
-            <p>{desc}</p>
-            <p>{status}</p>
+            <p className='task-desc'>{desc}</p>
+            <p className='task-status'>{status}</p>
         </div>
 
     </div>
