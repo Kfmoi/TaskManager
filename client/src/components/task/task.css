@@ -1,0 +1,42 @@
+.task-comp{
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value as needed */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.task-comp:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.task-top {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+
+
+.task-top-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-top-buttons button{
+    margin-left: 10px;
+}
+
+.task-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
