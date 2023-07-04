@@ -3,18 +3,18 @@ import { useCookies } from "react-cookie";
 import { useNavigate, Link } from "react-router-dom";
 import "./home.css";
 import { Task } from "../../components";
-import useUserID from "../../hooks/useUserID";
 import axios from "axios";
 
 const Home = () => {
   const [cookies] = useCookies(["mytoken"]);
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
-  const userID = useUserID();
 
   const getTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/task/${userID}}`);
+      const response = await axios.get(
+        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`
+      );
       setTasks(response.data);
       window.localStorage.setItem(
         "taskIds",
@@ -28,7 +28,9 @@ const Home = () => {
   const deleteTask = async (taskId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/task/${userID}/${taskId}`
+        `http://localhost:3000/task/${window.localStorage.getItem(
+          "userID"
+        )}/${taskId}`
       );
       getTasks();
     } catch (error) {
