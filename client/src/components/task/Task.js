@@ -1,11 +1,11 @@
 import React from 'react'
 import './task.css'
 
-const Task = ({title, desc, status, edit, del}) => {
+const Task = ({title, desc, status, edit, del, taskId}) => {
 
 
   return (
-    <div className='task-comp'>
+    <div className='task-comp' id={taskId}>
         <div className='task-top'>
             <h1 className='task-title'>{title}</h1>
             <div className='task-top-buttons'>
