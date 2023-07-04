@@ -9,7 +9,6 @@ import axios from "axios";
 const Home = () => {
   const [cookies] = useCookies(["mytoken"]);
   const navigate = useNavigate();
-  const userID = useUserID();
   const [tasks, setTasks] = useState([]);
 
   const getTasks = async () => {
@@ -19,10 +18,26 @@ const Home = () => {
       );
       console.log(response.data);
       setTasks(response.data);
+  
+      window.localStorage.setItem("taskIds", JSON.stringify(response.data.map((task) => task._id)));
     } catch (error) {
       console.error("Error fetching user tasks:", error);
     }
   };
+
+  const deleteTask = async (taskId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/task/${window.localStorage.getItem("userID")}/${taskId}`
+      );
+      console.log(response.data);
+      getTasks();
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+  
+  
 
   useEffect(() => {
     getTasks();
@@ -42,10 +57,13 @@ const Home = () => {
             </Link>
             {tasks.map((task) => (
               <Task
-                key={task.id} 
+                taskId={task._id}
+                key={task._id}
                 title={task.title}
                 desc={task.description}
                 status={task.status}
+                del={() => deleteTask(task._id)}
+                edit={() => navigate(`/edit-task/${task._id}`)}
               />
             ))}
           </div>
