@@ -1,5 +1,8 @@
 import React from "react";
 import "./task.css";
+import PendingIcon from "../../assets/pending.png";
+import DelayedIcon from "../../assets/delayed.png";
+import CompletedIcon from "../../assets/completed.png";
 
 const Task = ({ title, desc, status, edit, del, taskId }) => {
   return (
@@ -13,7 +16,16 @@ const Task = ({ title, desc, status, edit, del, taskId }) => {
       </div>
       <div className="task-bottom">
         <p className="task-desc">{desc}</p>
-        <p className="task-status">{status}</p>
+        <div className="task-status">
+          {status === "Pending" ? (
+            <img src={PendingIcon} alt="pending" />
+          ) : status === "Delayed" ? (
+            <img src={DelayedIcon} alt="delayed" />
+          ) : (
+            <img src={CompletedIcon} alt="completed" />
+          )}
+          <p>{status}</p>
+          </div>
       </div>
     </div>
   );
