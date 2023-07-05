@@ -93,39 +93,56 @@ router.delete("/:userId/:taskId", async (req, res) => {
 
 // Update Task
 router.put("/:userId/:taskId", async (req, res) => {
-    const { userId, taskId } = req.params;
-    const { title, description, status } = req.body;
-  
-    try {
-      const user = await UserModel.findById(userId);
-  
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-  
-      const task = await TaskModel.findById(taskId);
-  
-      if (!task) {
-        return res.status(404).json({ error: "Task not found" });
-      }
-  
-      // Check if the task belongs to the specified user
-      if (task.user.toString() !== userId) {
-        return res.status(403).json({ error: "Forbidden" });
-      }
-  
-      // Update the task properties
-      task.title = title || task.title;
-      task.description = description || task.description;
-      task.status = status || task.status;
-  
-      await task.save();
-  
-      res.json({ message: "Task updated successfully" });
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
+  const { userId, taskId } = req.params;
+  const { title, description, status } = req.body;
+
+  try {
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  });
-  
+
+    const task = await TaskModel.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    // Check if the task belongs to the specified user
+    if (task.user.toString() !== userId) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    // Update the task properties
+    task.title = title || task.title;
+    task.description = description || task.description;
+    task.status = status || task.status;
+
+    await task.save();
+
+    res.json({ message: "Task updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Delete all tasks
+router.delete("/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User  not found" });
+    }
+
+    await TaskModel.deleteMany({ user: userId });
+    res.json({ message: "All tasks deleted successfullt" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 export { router as taskRouter };
