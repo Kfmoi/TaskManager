@@ -21,3 +21,27 @@ Make sure you have the following software installed on your system:
 ``` cd server ```
 3. Install the server dependencies by running the following command:
 ``` npm install ```
+4. Start the server:
+``` npm start ```
+This will launch the server, which will be running on http://localhost:8000.
+
+5. Open a new terminal window and change your current directory to the client folder:
+``` cd ../client ```
+6. Install the client dependencies by running the following command:
+``` npm install ```
+7. Start the server:
+``` npm start ```
+This will launch the client application, which will be running on http://localhost:3000.
+
+8. You're now ready to use the Task Manager in your browser! Visit http://localhost:3000 and start managing your tasks.
+
+## Key Features
+
+* Create, edit, and delete tasks
+* Mark tasks as completed or pending
+* User authentication and authorization
+* Responsive and user-friendly interface
+
+## Contributing
+
+Contributions to the Task Manager are always welcome! If you find any issues or want to add new features, please submit a pull request or open an issue on the project repository.
