@@ -38,9 +38,20 @@ const Home = () => {
     }
   };
 
+  const deleteAllTasks = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`
+      );
+      getTasks();
+    } catch (error) {
+      console.error("Error deleting all tasks");
+    }
+  };
+
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [tasks]);
 
   return (
     <div className="home">
@@ -50,9 +61,16 @@ const Home = () => {
       <div className="home-body">
         {cookies.mytoken ? (
           <div>
-            <Link to="/create-task" className="create-task">
-              Create Task
-            </Link>
+            <div className="home-buttons">
+              <Link to="/create-task" className="create-task">
+                Create Task
+              </Link>
+              {tasks.length > 0 && (
+                <button className="delete-all" onClick={deleteAllTasks}>
+                  Delete all tasks
+                </button>
+              )}
+            </div>
             {tasks.map((task) => (
               <Task
                 taskId={task._id}
