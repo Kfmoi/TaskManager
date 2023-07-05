@@ -1,6 +1,5 @@
 .task-comp {
   margin: 10px;
-  padding: 10px;
   background-color: rgba(
     255,
     255,
@@ -10,6 +9,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
+  padding: 10px;
   width: 800px;
 }
 
@@ -22,7 +22,6 @@
   justify-content: space-between;
   align-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .task-top-buttons {
@@ -32,24 +31,20 @@
 }
 
 .task-top-buttons button {
-  margin-left: 10px;
-  margin-right: 10px;
   border-radius: 10px;
   border: none;
-  padding: 20px;
-  color: aliceblue;
+  top: 0;
+  margin-bottom: 50px;
   font-size: 1rem;
   font-weight: 700;
-
-  background: linear-gradient(
-    90deg,
-    rgba(33, 150, 243, 1) 0%,
-    rgba(0, 188, 212, 1) 100%,
-    rgba(238, 130, 238, 1) 100%
-  );
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  margin-right: 10px;
+}
+
+.modify{
+  width: 20px;
+  height: 20px;
 }
 
 .task-top-buttons button:hover {
@@ -61,24 +56,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50px;
 }
 
 .task-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+}
+
+.task-desc {
   font-size: 1.5rem;
   font-weight: 700;
   color: #000;
   text-align: center;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-
-.task-desc {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #000;
-  text-align: center;
-  margin-bottom: 20px;
-  margin-left: 20px;
 }
 
 .task-status {
@@ -86,22 +78,11 @@
   font-weight: 700;
   color: #000;
   text-align: center;
-  margin-bottom: 20px;
-  margin-left: 20px;
 }
 
-.task-status{
-    font-size: 1rem;
-    font-weight: 700;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
 
 .task-status img{
-    width: 68px;
-    height: 68px;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: -20px;
 }
