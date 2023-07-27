@@ -4,10 +4,14 @@ import { UserModel } from "../models/UserModel.js";
 
 const router = express.Router();
 
+
+const taskHandler = ....;
 // Post Task
 router.post("/:userId", async (req, res) => {
   const { userId } = req.params;
   const { title, description, status } = req.body;
+
+  const newTask = taskHandler.createNewTaskForuser(userId, TaskDescription(title,desc,status));
 
   try {
     const user = await UserModel.findById(userId);
