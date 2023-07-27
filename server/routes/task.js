@@ -23,6 +23,7 @@ router.post("/:userId", async (req, res) => {
       user: user._id,
     });
 
+    //users.userTaskId.push(task._id);
     user.tasks.push(task._id);
 
     await user.save();
