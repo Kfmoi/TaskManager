@@ -13,7 +13,7 @@ const Home = () => {
   const getTasks = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`
+        `http://localhost:8000/task/${window.localStorage.getItem("userID")}`
       );
       setTasks(response.data);
       window.localStorage.setItem(
@@ -28,7 +28,7 @@ const Home = () => {
   const deleteTask = async (taskId) => {
     try {
       await axios.delete(
-        `http://localhost:3000/task/${window.localStorage.getItem(
+        `http://localhost:8000/task/${window.localStorage.getItem(
           "userID"
         )}/${taskId}`
       );
@@ -41,7 +41,7 @@ const Home = () => {
   const deleteAllTasks = async () => {
     try {
       await axios.delete(
-        `http://localhost:3000/task/${window.localStorage.getItem("userID")}`
+        `http://localhost:8000/task/${window.localStorage.getItem("userID")}`
       );
       getTasks();
     } catch (error) {

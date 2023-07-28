@@ -20,7 +20,7 @@ const EditTask = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/task/${window.localStorage.getItem(
+        `http://localhost:8000/task/${window.localStorage.getItem(
           "userID"
         )}/${taskId}`,
         {
