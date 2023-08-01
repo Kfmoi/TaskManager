@@ -13,7 +13,11 @@ router.post("/:userId", async (req, res) => {
     const user = await UserModel.findById(userId);
 
     if (!user) {
-      return res.status(405).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if(!title && !description && !status){
+      return res.status(405).json({error: "Missing Information"})
     }
 
     const task = new TaskModel({
@@ -50,7 +54,7 @@ router.get("/:userId", async (req, res) => {
 
     const tasks = await TaskModel.find({ user: userId });
 
-    res.json(tasks);
+    res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -85,7 +89,7 @@ router.delete("/:userId/:taskId", async (req, res) => {
 
     await TaskModel.findByIdAndDelete(taskId);
 
-    res.json({ message: "Task deleted successfully" });
+    res.status(200).json({ message: "Task deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -121,7 +125,7 @@ router.put("/:userId/:taskId", async (req, res) => {
 
     await task.save();
 
-    res.json({ message: "Task updated successfully" });
+    res.status(200).json({ message: "Task updated successfully" });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
@@ -139,7 +143,9 @@ router.delete("/:userId", async (req, res) => {
     }
 
     await TaskModel.deleteMany({ user: userId });
-    res.json({ message: "All tasks deleted successfullt" });
+    user.tasks = [];
+    await user.save();
+    res.status(200).json({ message: "All tasks deleted successfullt" });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
