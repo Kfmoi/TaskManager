@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
 
   await user.save();
 
-  res.json({
+  res.status(200).json({
     status: `User ${username} registered!`,
   });
 });
@@ -68,6 +68,35 @@ router.post("/login", async (req, res) => {
     u: user._id,
   });
 });
+
+// Delete Account
+router.delete('/', async (request, response) => {
+  const {username, password} = request.body;
+
+  if (!username || !password) {
+    return response
+      .status(400)
+      .json({ message: "Missing username and/or password" });
+  }
+
+  const user = await UserModel.findOne({ username });
+
+  if (!user) {
+    return response.status(400).json({ message: "User does not exist" });
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordCorrect) {
+    return response.status(400).json({ message: "Invalid credentials" });
+  }
+
+  await UserModel.findOneAndDelete({username});
+
+  response.status(200).json({
+    message: `${username} account is deleted`
+  })
+})
 
 
 
