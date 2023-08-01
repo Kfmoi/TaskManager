@@ -1,19 +1,19 @@
 import app from "../app";
 import request from "supertest";
 import { UserModel } from "../models/UserModel";
+import { TaskModel } from "../models/TaskModel";
 
-const username = "Tasktest"
+const username = "Tasktest";
+const taskData = {
+  title: "Task 1",
+  description: "Task description",
+  status: "in progress",
+};
 
-describe("POST /user/:userId", () => {
+describe("POST /task/:userId", () => {
   describe("Successfully creating a post", () => {
     test("The message returned to the client", async () => {
-      const user = await UserModel.findOne({username});
-
-      const taskData = {
-        title: "Task 1",
-        description: "Task description",
-        status: "in progress",
-      };
+      const user = await UserModel.findOne({ username });
 
       const response = await request(app)
         .post(`/task/${user._id}`)
@@ -23,9 +23,9 @@ describe("POST /user/:userId", () => {
       expect(response.body.status).toEqual(`Task ${taskData.title} saved!`);
     });
     test("Missing a title, description, or status", async () => {
-      const user = await UserModel.findOne({username});
+      const user = await UserModel.findOne({ username });
 
-      const taskData = [
+      const multipleTaskData = [
         { title: "Task 1", description: "Task description" },
         {
           description: "Task description",
@@ -46,7 +46,7 @@ describe("POST /user/:userId", () => {
         },
       ];
 
-      for (const data of taskData) {
+      for (const data of multipleTaskData) {
         const response = await request(app)
           .post(`/task/${user._id}`)
           .send(data);
@@ -54,6 +54,127 @@ describe("POST /user/:userId", () => {
         expect(response.statusCode).toBe(200);
         expect(response.body.status).toEqual(`Task ${data.title} saved!`);
       }
+    });
+  });
+  describe("Unsuccessful request", () => {
+    test("No information is inputted", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const emptyTaskData = {};
+
+      const response = await request(app)
+        .post(`/task/${user._id}`)
+        .send(emptyTaskData);
+
+      expect(response.statusCode).toBe(405);
+      expect(response.body.error).toBeDefined();
+    });
+  });
+});
+
+describe("GET /task/:userId", () => {
+  describe("Successful request", () => {
+    test("The message returned to the client", async () => {
+      const user = await UserModel.findOne({ username });
+
+      await request(app).post(`/task/${user._id}`).send(taskData);
+
+      const response = await request(app).get(`/task/${user._id}`);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toBeDefined();
+    });
+  });
+});
+
+describe("DELETE /task/:userId/:taskId", () => {
+  describe("Successfull delete request", () => {
+    test("The message returned to the client", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const deleteTaskData = {
+        title: "Delete Task",
+      };
+
+      await request(app).post(`/task/${user._id}`).send(deleteTaskData);
+
+      const task = await TaskModel.findOne({ title: "Delete Task" });
+
+      const response = await request(app).delete(
+        `/task/${user._id}/${task._id}`
+      );
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBeDefined();
+    });
+  });
+});
+
+describe("PUT /task/:userId/:taskId", () => {
+  describe("Successful put request", () => {
+    test("The message returned to the client", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const updateTaskData = {
+        title: "Update Task",
+      };
+
+      await request(app).post(`/task/${user._id}`).send(updateTaskData);
+
+      const task = await TaskModel.findOne({ title: "Update Task" });
+
+      const response = await request(app)
+        .put(`/task/${user._id}/${task._id}`)
+        .send({
+          status: "pending",
+        });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBeDefined();
+    });
+
+    test("The content has been updated", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const updateTaskData = {
+        title: "Second Update Task",
+      };
+
+      await request(app).post(`/task/${user._id}`).send(updateTaskData);
+
+      const task = await TaskModel.findOne({ title: "Second Update Task" });
+
+      const response = await request(app)
+        .put(`/task/${user._id}/${task._id}`)
+        .send({
+          status: "pending",
+        });
+
+      const check = await TaskModel.findOne({ title: "Second Update Task" });
+
+      expect(check.status).toEqual("pending");
+    });
+  });
+});
+
+describe("DELETE /task/:userId", () => {
+  describe("Successful Delete Request", () => {
+    test("The message returned to the client", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const response = await request(app).delete(`/task/${user._id}`);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBeDefined();
+    });
+    test("The users tasks are empty", async () => {
+      const user = await UserModel.findOne({ username });
+
+      const response = await request(app).delete(`/task/${user._id}`);
+
+      const updatedUser = await UserModel.findOne({ username });
+
+      expect(updatedUser.tasks).toEqual([]);
     });
   });
 });
