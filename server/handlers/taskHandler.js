@@ -65,7 +65,9 @@ const deleteTask = async (userId, taskId) => {
       return { status: 403, data: { error: "Forbidden" } };
     }
 
-    user.tasks = user.tasks.filter((taskId) => taskId.toString() !== task._id.toString());
+    user.tasks = user.tasks.filter(
+      (taskId) => taskId.toString() !== task._id.toString()
+    );
 
     await user.save();
     await TaskModel.findByIdAndDelete(taskId);
@@ -93,7 +95,7 @@ const updateTask = async (userId, taskId, title, description, status) => {
     if (task.user.toString() !== userId) {
       return { status: 403, data: { error: "Forbidden" } };
     }
-    
+
     task.title = title || task.title;
     task.description = description || task.description;
     task.status = status || task.status;

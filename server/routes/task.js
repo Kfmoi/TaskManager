@@ -1,5 +1,11 @@
 import express from "express";
-import { createTask, getUserTasks, deleteTask, updateTask, deleteAllTasks } from "../handlers/taskHandler.js"
+import {
+  createTask,
+  getUserTasks,
+  deleteTask,
+  updateTask,
+  deleteAllTasks,
+} from "../handlers/taskHandler.js";
 
 const router = express.Router();
 

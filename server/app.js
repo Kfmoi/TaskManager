@@ -1,11 +1,10 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
 
-import { usersRouter } from './routes/user.js';
-import { taskRouter } from './routes/task.js';
-
+import { usersRouter } from "./routes/user.js";
+import { taskRouter } from "./routes/task.js";
 
 dotenv.config();
 
@@ -19,9 +18,8 @@ app.use(express.json());
 // DB config
 mongoose.connect(process.env.MONGODB_URI);
 
-
 // API endpoints
-app.use('/user', usersRouter);
-app.use('/task', taskRouter);
+app.use("/user", usersRouter);
+app.use("/task", taskRouter);
 
-export default app
+export default app;

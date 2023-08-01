@@ -157,11 +157,9 @@ describe("PUT /task/:userId/:taskId", () => {
 
       const task = await TaskModel.findOne({ title: "Hello" });
 
-      await request(app)
-        .put(`/task/${user._id}/${task._id}`)
-        .send({
-          status: "pending",
-        });
+      await request(app).put(`/task/${user._id}/${task._id}`).send({
+        status: "pending",
+      });
 
       const check = await TaskModel.findOne({ title: "Hello" });
 
