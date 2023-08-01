@@ -13,7 +13,7 @@ router.post("/:userId", async (req, res) => {
     const user = await UserModel.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(405).json({ error: "User not found" });
     }
 
     const task = new TaskModel({
@@ -29,7 +29,7 @@ router.post("/:userId", async (req, res) => {
 
     await task.save();
 
-    res.json({
+    res.status(200).json({
       status: `Task ${title} saved!`,
     });
   } catch (error) {
