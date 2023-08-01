@@ -51,8 +51,15 @@ describe("POST /task/:userId", () => {
           .post(`/task/${user._id}`)
           .send(data);
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.status).toEqual(`Task ${data.title} saved!`);
+        if (!data.title || !data.description || !data.status) {
+          // Expecting a status code of 405 for incomplete data
+          expect(response.statusCode).toBe(405);
+          expect(response.body.error).toBeDefined();
+        } else {
+          // Expecting a status code of 200 for valid data
+          expect(response.statusCode).toBe(200);
+          expect(response.body.status).toEqual(`Task ${data.title} saved!`);
+        }
       }
     });
   });
@@ -93,12 +100,14 @@ describe("DELETE /task/:userId/:taskId", () => {
       const user = await UserModel.findOne({ username });
 
       const deleteTaskData = {
-        title: "Delete Task",
+        title: "hello",
+        description: "Task description",
+        status: "in progress",
       };
 
       await request(app).post(`/task/${user._id}`).send(deleteTaskData);
 
-      const task = await TaskModel.findOne({ title: "Delete Task" });
+      const task = await TaskModel.findOne({ title: "hello" });
 
       const response = await request(app).delete(
         `/task/${user._id}/${task._id}`
@@ -116,12 +125,14 @@ describe("PUT /task/:userId/:taskId", () => {
       const user = await UserModel.findOne({ username });
 
       const updateTaskData = {
-        title: "Update Task",
+        title: "Hello",
+        description: "Task description",
+        status: "in progress",
       };
 
       await request(app).post(`/task/${user._id}`).send(updateTaskData);
 
-      const task = await TaskModel.findOne({ title: "Update Task" });
+      const task = await TaskModel.findOne({ title: "Hello" });
 
       const response = await request(app)
         .put(`/task/${user._id}/${task._id}`)
@@ -137,20 +148,22 @@ describe("PUT /task/:userId/:taskId", () => {
       const user = await UserModel.findOne({ username });
 
       const updateTaskData = {
-        title: "Second Update Task",
+        title: "Hello",
+        description: "Task description",
+        status: "in progress",
       };
 
       await request(app).post(`/task/${user._id}`).send(updateTaskData);
 
-      const task = await TaskModel.findOne({ title: "Second Update Task" });
+      const task = await TaskModel.findOne({ title: "Hello" });
 
-      const response = await request(app)
+      await request(app)
         .put(`/task/${user._id}/${task._id}`)
         .send({
           status: "pending",
         });
 
-      const check = await TaskModel.findOne({ title: "Second Update Task" });
+      const check = await TaskModel.findOne({ title: "Hello" });
 
       expect(check.status).toEqual("pending");
     });
@@ -170,7 +183,7 @@ describe("DELETE /task/:userId", () => {
     test("The users tasks are empty", async () => {
       const user = await UserModel.findOne({ username });
 
-      const response = await request(app).delete(`/task/${user._id}`);
+      await request(app).delete(`/task/${user._id}`);
 
       const updatedUser = await UserModel.findOne({ username });
 
