@@ -22,7 +22,7 @@ const Login = () => {
       });
 
       setToken("mytoken", response.data.token);
-      window.localStorage.setItem("userID", response.data.u);
+      window.localStorage.setItem("userID", response.data.userId);
       navigate("/");
     } catch (error) {
       console.log(error);
