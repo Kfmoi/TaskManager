@@ -17,11 +17,13 @@ Make sure you have the following software installed on your system:
 1. Open your local terminal
 2. Run the server by running the following command:
 ``` docker run -p 8000:8000 kfmoi26/taskmanager-server ```
+
 This will launch the server, which will be running on http://localhost:8000.
 
 3. Open a new terminal window:
 6. Run the client application by the following command:
 ``` docker run -p 3000:3000 kfmoi26/taskmanager-client ```
+
 This will launch the client application, which will be running on http://localhost:3000.
 
 8. You're now ready to use the Task Manager in your browser! Visit http://localhost:3000 and start managing your tasks.
