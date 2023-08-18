@@ -10,27 +10,18 @@ To run the MERN Task Manager locally on your machine, please follow the instruct
 
 Make sure you have the following software installed on your system:
 
-* Node.js (v14 or above)
-* npm (Node Package Manager)
-* MongoDB (Make sure the MongoDB service is running)
+* Docker: Make sure you have Docker installed on your system. You can download and install it from the official Docker website: https://www.docker.com/get-started
 
-### Installation
+### Usage
 
-1. Clone the repository to your local machine
-2. Change your current directory to the server folder
-``` cd server ```
-3. Install the server dependencies by running the following command:
-``` npm install ```
-4. Start the server:
-``` npm start ```
+1. Open your local terminal
+2. Run the server by running the following command:
+``` docker run -p 8000:8000 kfmoi26/taskmanager-server ```
 This will launch the server, which will be running on http://localhost:8000.
 
-5. Open a new terminal window and change your current directory to the client folder:
-``` cd ../client ```
-6. Install the client dependencies by running the following command:
-``` npm install ```
-7. Start the server:
-``` npm start ```
+3. Open a new terminal window:
+6. Run the client application by the following command:
+``` docker run -p 3000:3000 kfmoi26/taskmanager-client ```
 This will launch the client application, which will be running on http://localhost:3000.
 
 8. You're now ready to use the Task Manager in your browser! Visit http://localhost:3000 and start managing your tasks.
