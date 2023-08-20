@@ -1,16 +1,19 @@
 import { UserModel } from "../models/UserModel.js";
 import { TaskModel } from "../models/TaskModel.js";
+import { usersRouter } from "../routes/user.js";
 
-const createTask = async (userId, title, description, status) => {
-  try {
-    const user = await UserModel.findById(userId);
+const createTask = async (userModel , userId, title, description, status) => {
+    const user = await userModel.findById(userId);
 
     if (!user) {
-      return { status: 404, data: { error: "User not found" } };
+      throw new UserNotFound();
+      // return { status: 404, data: { error: "User not found" } };
     }
 
     if (!title || !description || !status) {
-      return { status: 405, data: { error: "Missing Information" } };
+      throw new MissingTaskInformation();
+
+      // return { status: 405, data: { error: "Missing Information" } };
     }
 
     const task = new TaskModel({
@@ -22,13 +25,12 @@ const createTask = async (userId, title, description, status) => {
 
     user.tasks.push(task._id);
 
-    await user.save();
-    await task.save();
+   await userModel.addTask(task._id);
+    await userModel.save(user); 
 
-    return { status: 200, data: { status: `Task ${title} saved!` } };
-  } catch (error) {
-    return { status: 500, data: { error: "Internal server error" } };
-  }
+    // await user.save();
+    // await task.save();
+
 };
 
 const getUserTasks = async (userId) => {
