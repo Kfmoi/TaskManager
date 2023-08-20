@@ -6,7 +6,6 @@ FROM node:14-alpine
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN apk add --no-cache make gcc g++ python3
 RUN npm rebuild bcrypt --build-from-source
 
 
